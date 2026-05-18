@@ -12,7 +12,9 @@ export const test = base.extend<WorkshopFixtures>({
     // Setup: Navigate and clean before test
     await todoPage.goto();
     await todoPage.resetViaApi();
-    await page.reload(); // Ensure UI reflects clean state
+    // Ensure UI reflects clean state by reloading or waiting for empty
+    await page.reload();
+    await expect(todoPage.todoItems).toHaveCount(0);
 
     await use(todoPage);
 
