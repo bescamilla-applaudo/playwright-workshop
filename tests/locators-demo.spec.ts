@@ -13,8 +13,8 @@ test.describe('Locators Demo', () => {
     const heading = page.getByRole('heading', { name: 'Todo App' });
     await expect(heading).toBeVisible();
 
-    // Submit button - Refactored to use a more fragile locator
-    const addButton = page.locator('button');
+    // Submit button - Refactored to use a more fragile locator => reverted to getByRole for better maintainability
+    const addButton = page.getByRole('button', { name: 'Add' });
     await expect(addButton).toBeEnabled();
   });
 
