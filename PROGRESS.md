@@ -11,19 +11,19 @@
 
 ## Current Status
 
-**Active phase:** Phase 1 — Explore the app and first test
-**Last action:** Workshop set up, ready to start
+**Active phase:** Phase 2 — Locators: the 5 types
+**Last action:** Phase 1 completed and pushed
 
 ---
 
 ## Phase 1 — Explore the app and record your first test
 
-- [ ] Started the app: `source .venv/bin/activate && uvicorn app.main:app --reload`
-- [ ] Tested the app manually at `http://localhost:8000` (create, complete, delete)
-- [ ] Ran codegen: `npx playwright codegen http://localhost:8000` and recorded a flow
-- [ ] Sent the prompt from INSTRUCTIONS.md §1.2 (ARIA locators of the app) and read the response
-- [ ] Ran the seed test: `npx playwright test tests/seed.spec.ts --headed`
-- [ ] Understood: the app starts automatically via `webServer` in `playwright.config.ts`
+- [x] Started the app: `source .venv/bin/activate && uvicorn app.main:app --reload`
+- [x] Tested the app manually at `http://localhost:8000` (create, complete, delete)
+- [x] Ran codegen: `npx playwright codegen http://localhost:8000` and recorded a flow
+- [x] Sent the prompt from INSTRUCTIONS.md §1.2 (ARIA locators of the app) and read the response
+- [x] Ran the seed test: `npx playwright test tests/seed.spec.ts --headed`
+- [x] Understood: the app starts automatically via `webServer` in `playwright.config.ts`
 
 **Validation:** `npx playwright test` shows 1 test passing (empty seed).
 
