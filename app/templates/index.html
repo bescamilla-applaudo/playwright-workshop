@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo App — Playwright Workshop</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f0f4f8;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    main {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 2rem;
+      width: 100%;
+      max-width: 520px;
+      height: fit-content;
+    }
+
+    h1 { font-size: 1.75rem; margin-bottom: 1.5rem; color: #1a202c; }
+
+    /* ── Form ── */
+    #add-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    label[for="todo-input"] {
+      /* visually hidden but readable by screen readers and Playwright getByLabel */
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    #todo-input {
+      flex: 1;
+      padding: 0.6rem 0.9rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #todo-input:focus { border-color: #667eea; }
+    #todo-input::placeholder { color: #a0aec0; }
+
+    button[type="submit"] {
+      padding: 0.6rem 1.1rem;
+      background: #667eea;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button[type="submit"]:hover { background: #5a67d8; }
+
+    /* ── Todo list ── */
+    #todo-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    #todo-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+    }
+
+    .todo-title {
+      flex: 1;
+      font-size: 1rem;
+      color: #2d3748;
+    }
+
+    .todo-title.completed {
+      text-decoration: line-through;
+      color: #a0aec0;
+    }
+
+    .btn-complete, .btn-delete {
+      border: none;
+      border-radius: 6px;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-complete { background: #c6f6d5; color: #276749; }
+    .btn-complete:hover { background: #9ae6b4; }
+    .btn-complete:disabled { opacity: 0.45; cursor: default; }
+
+    .btn-delete { background: #fed7d7; color: #9b2c2c; }
+    .btn-delete:hover { background: #feb2b2; }
+
+    /* ── Status ── */
+    #todo-count {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: #718096;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Todo App</h1>
+
+    <!--
+      LOCATOR GUIDE para Playwright:
+
+      Accessibility (recomendados):
+        page.getByLabel('New todo')                 → encuentra #todo-input via <label for>
+        page.getByRole('button', { name: 'Add' })   → el botón submit
+        page.getByRole('list', { name: 'Todos' })   → el <ul>
+        page.getByRole('status')                    → el contador
+
+      DOM (para aprender la diferencia):
+        page.locator('#todo-input')                 → por ID
+        page.locator('#add-form button[type=submit]') → CSS selector
+        page.getByTestId('todo-item')               → por data-testid
+    -->
+
+    <form aria-label="Add todo" id="add-form">
+      <label for="todo-input">New todo</label>
+      <input
+        type="text"
+        id="todo-input"
+        name="title"
+        placeholder="What needs to be done?"
+        autocomplete="off"
+      />
+      <button type="submit">Add</button>
+    </form>
+
+    <section aria-label="Todo list">
+      <ul
+        id="todo-list"
+        role="list"
+        aria-label="Todos"
+      >
+        <!-- Rendered by JavaScript -->
+      </ul>
+      <p role="status" id="todo-count" aria-live="polite">0 items left</p>
+    </section>
+  </main>
+
+  <script>
+    const form     = document.getElementById('add-form');
+    const input    = document.getElementById('todo-input');
+    const list     = document.getElementById('todo-list');
+    const countEl  = document.getElementById('todo-count');
+
+    // ── Render ─────────────────────────────────────────────────────────────
+
+    function createTodoElement(todo) {
+      const li = document.createElement('li');
+      li.setAttribute('data-testid', 'todo-item');   // getByTestId('todo-item')
+      li.setAttribute('data-todo-id', todo.id);
+
+      const span = document.createElement('span');
+      span.className = 'todo-title' + (todo.completed ? ' completed' : '');
+      span.textContent = todo.title;
+
+      // Complete button — aria-label enables getByRole('button', { name: /Complete/ })
+      const completeBtn = document.createElement('button');
+      completeBtn.className = 'btn-complete';
+      completeBtn.textContent = '✓';
+      completeBtn.setAttribute('aria-label', `Complete: ${todo.title}`);
+      completeBtn.setAttribute('aria-pressed', String(todo.completed));
+      completeBtn.disabled = todo.completed;
+      completeBtn.addEventListener('click', () => handleComplete(todo.id));
+
+      // Delete button — aria-label enables getByRole('button', { name: /Delete/ })
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'btn-delete';
+      deleteBtn.textContent = '✗';
+      deleteBtn.setAttribute('aria-label', `Delete: ${todo.title}`);
+      deleteBtn.addEventListener('click', () => handleDelete(todo.id));
+
+      li.append(span, completeBtn, deleteBtn);
+      return li;
+    }
+
+    function renderTodos(todos) {
+      list.innerHTML = '';
+      todos.forEach(todo => list.appendChild(createTodoElement(todo)));
+
+      const active = todos.filter(t => !t.completed).length;
+      countEl.textContent = `${active} item${active !== 1 ? 's' : ''} left`;
+    }
+
+    // ── API calls ──────────────────────────────────────────────────────────
+
+    async function fetchTodos() {
+      const res = await fetch('/api/todos');
+      return res.json();
+    }
+
+    async function handleComplete(id) {
+      await fetch(`/api/todos/${id}/complete`, { method: 'PATCH' });
+      renderTodos(await fetchTodos());
+    }
+
+    async function handleDelete(id) {
+      await fetch(`/api/todos/${id}`, { method: 'DELETE' });
+      renderTodos(await fetchTodos());
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = input.value.trim();
+      if (!title) return;
+
+      await fetch('/api/todos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title }),
+      });
+
+      input.value = '';
+      renderTodos(await fetchTodos());
+    });
+
+    // Initial load
+    fetchTodos().then(renderTodos);
+  </script>
+</body>
+</html>
