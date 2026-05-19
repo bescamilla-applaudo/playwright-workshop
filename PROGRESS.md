@@ -11,8 +11,8 @@
 
 ## Current Status
 
-**Active phase:** Phase 2 — Locators: the 5 types
-**Last action:** Phase 1 completed and pushed
+**Active phase:** Phase 7 — Playwright Agents (planner/generator/healer)
+**Last action:** Phase 6 completed and marked
 
 ---
 
@@ -31,10 +31,10 @@
 
 ## Phase 2 — Locators: the 5 types
 
-- [ ] Sent the prompt from INSTRUCTIONS.md §2 and Copilot generated `tests/locators-demo.spec.ts`
-- [ ] Ran: `npx playwright test tests/locators-demo.spec.ts --headed` — 5 tests pass
-- [ ] Did exercise 2.2 (break a locator) and understood why `getByRole` > CSS
-- [ ] Can explain when to use each locator type without looking at the reference
+- [x] Sent the prompt from INSTRUCTIONS.md §2 and Copilot generated `tests/locators-demo.spec.ts`
+- [x] Ran: `npx playwright test tests/locators-demo.spec.ts --headed` — 5 tests pass
+- [x] Did exercise 2.2 (break a locator) and understood why `getByRole` > CSS
+- [x] Can explain when to use each locator type without looking at the reference
 
 **Validation:** `npx playwright test tests/locators-demo.spec.ts` — 5/5 pass.
 
@@ -42,10 +42,10 @@
 
 ## Phase 3 — Page Object Model (POM)
 
-- [ ] Sent the prompt from INSTRUCTIONS.md §3 and got `tests/pages/TodoPage.ts` + `tests/fixtures.ts`
-- [ ] Reviewed the generated POM: has `readonly` locators, async methods, `resetViaApi()`
-- [ ] Understood: teardown via API is faster and more reliable than UI clicks
-- [ ] Compared with `solutions/tests/pages/TodoPage.ts` — differences noted below
+- [x] Sent the prompt from INSTRUCTIONS.md §3 and got `tests/pages/TodoPage.ts` + `tests/fixtures.ts`
+- [x] Reviewed the generated POM: has `readonly` locators, async methods, `resetViaApi()`
+- [x] Understood: teardown via API is faster and more reliable than UI clicks
+- [x] Compared with `solutions/tests/pages/TodoPage.ts` — differences noted below
 
 **Validation:** `npx playwright test tests/seed.spec.ts` — still compiles without errors.
 
@@ -53,10 +53,10 @@
 
 ## Phase 4 — Flow 1: Create todos
 
-- [ ] Sent the prompt from INSTRUCTIONS.md §4 and got `tests/flows/todo-create.spec.ts`
-- [ ] Ran: `npx playwright test tests/flows/todo-create.spec.ts --headed` — all pass
-- [ ] Each test is independent (fixture resets state)
-- [ ] If something failed, pasted the error to Copilot and it fixed it
+- [x] Sent the prompt from INSTRUCTIONS.md §4 and got `tests/flows/todo-create.spec.ts`
+- [x] Ran: `npx playwright test tests/flows/todo-create.spec.ts --headed` — all pass
+- [x] Each test is independent (fixture resets state)
+- [x] If something failed, pasted the error to Copilot and it fixed it
 
 **Validation:** `npx playwright test tests/flows/todo-create.spec.ts` — 4/4 pass.
 
@@ -64,10 +64,10 @@
 
 ## Phase 5 — Flow 2: Complete/delete + Mocks
 
-- [ ] Sent the prompt from INSTRUCTIONS.md §5 and got `tests/flows/todo-complete.spec.ts`
-- [ ] All 3 flow tests pass (complete, delete, counter)
-- [ ] Both mock tests pass (`page.route` intercepts correctly)
-- [ ] Sent prompt §5.2 and understood `fulfill()` vs `continue()` vs `abort()`
+- [x] Sent the prompt from INSTRUCTIONS.md §5 and got `tests/flows/todo-complete.spec.ts`
+- [x] All 3 flow tests pass (complete, delete, counter)
+- [x] Both mock tests pass (`page.route` intercepts correctly)
+- [x] Sent prompt §5.2 and understood `fulfill()` vs `continue()` vs `abort()`
 
 **Validation:** `npx playwright test tests/flows/todo-complete.spec.ts` — 5/5 pass.
 
@@ -75,10 +75,10 @@
 
 ## Phase 6 — Debugging
 
-- [ ] Broke a locator on purpose and ran with `--trace on`
-- [ ] Opened the trace viewer and found the screenshot at the moment of failure
-- [ ] Used `page.pause()` and explored the live DOM with the Inspector
-- [ ] Asked Copilot to diagnose the error (prompt §6.3) and it fixed it
+- [x] Broke a locator on purpose and ran with `--trace on`
+- [x] Opened the trace viewer and found the screenshot at the moment of failure
+- [x] Used `page.pause()` and explored the live DOM with the Inspector
+- [x] Asked Copilot to diagnose the error (prompt §6.3) and it fixed it
 
 **Validation:** Successfully broke, diagnosed, and repaired a test without help from solutions/.
 
