@@ -11,8 +11,8 @@
 
 ## Current Status
 
-**Active phase:** Phase 2 — Locators: the 5 types
-**Last action:** Phase 1 completed and pushed
+**Active phase:** Phase 4 — Flow 1: Create todos
+**Last action:** Phase 3 completed and pushed
 
 ---
 
@@ -31,10 +31,10 @@
 
 ## Phase 2 — Locators: the 5 types
 
-- [ ] Sent the prompt from INSTRUCTIONS.md §2 and Copilot generated `tests/locators-demo.spec.ts`
-- [ ] Ran: `npx playwright test tests/locators-demo.spec.ts --headed` — 5 tests pass
-- [ ] Did exercise 2.2 (break a locator) and understood why `getByRole` > CSS
-- [ ] Can explain when to use each locator type without looking at the reference
+- [x] Sent the prompt from INSTRUCTIONS.md §2 and Copilot generated `tests/locators-demo.spec.ts`
+- [x] Ran: `npx playwright test tests/locators-demo.spec.ts --headed` — 5 tests pass
+- [x] Did exercise 2.2 (break a locator) and understood why `getByRole` > CSS
+- [x] Can explain when to use each locator type without looking at the reference
 
 **Validation:** `npx playwright test tests/locators-demo.spec.ts` — 5/5 pass.
 
@@ -42,10 +42,10 @@
 
 ## Phase 3 — Page Object Model (POM)
 
-- [ ] Sent the prompt from INSTRUCTIONS.md §3 and got `tests/pages/TodoPage.ts` + `tests/fixtures.ts`
-- [ ] Reviewed the generated POM: has `readonly` locators, async methods, `resetViaApi()`
-- [ ] Understood: teardown via API is faster and more reliable than UI clicks
-- [ ] Compared with `solutions/tests/pages/TodoPage.ts` — differences noted below
+- [x] Sent the prompt from INSTRUCTIONS.md §3 and got `tests/pages/TodoPage.ts` + `tests/fixtures.ts`
+- [x] Reviewed the generated POM: has `readonly` locators, async methods, `resetViaApi()`
+- [x] Understood: teardown via API is faster and more reliable than UI clicks
+- [x] Compared with `solutions/tests/pages/TodoPage.ts` — differences noted below
 
 **Validation:** `npx playwright test tests/seed.spec.ts` — still compiles without errors.
 
