@@ -11,8 +11,8 @@
 
 ## Current Status
 
-**Active phase:** Phase 2 — Locators: the 5 types
-**Last action:** Phase 1 completed and pushed
+**Active phase:** Phase 3 — Page Object Model (POM)
+**Last action:** Phase 2 completed and pushed
 
 ---
 
@@ -31,10 +31,10 @@
 
 ## Phase 2 — Locators: the 5 types
 
-- [ ] Sent the prompt from INSTRUCTIONS.md §2 and Copilot generated `tests/locators-demo.spec.ts`
-- [ ] Ran: `npx playwright test tests/locators-demo.spec.ts --headed` — 5 tests pass
-- [ ] Did exercise 2.2 (break a locator) and understood why `getByRole` > CSS
-- [ ] Can explain when to use each locator type without looking at the reference
+- [x] Sent the prompt from INSTRUCTIONS.md §2 and Copilot generated `tests/locators-demo.spec.ts`
+- [x] Ran: `npx playwright test tests/locators-demo.spec.ts --headed` — 5 tests pass
+- [x] Did exercise 2.2 (break a locator) and understood why `getByRole` > CSS
+- [x] Can explain when to use each locator type without looking at the reference
 
 **Validation:** `npx playwright test tests/locators-demo.spec.ts` — 5/5 pass.
 
