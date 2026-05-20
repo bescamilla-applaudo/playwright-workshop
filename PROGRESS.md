@@ -11,8 +11,8 @@
 
 ## Current Status
 
-**Active phase:** Phase 8 — Python: same flows, sync API
-**Last action:** Phase 7 completed and pushed
+**Active phase:** Phase 9 — Playwright MCP: browser control
+**Last action:** Phase 8 completed and pushed
 
 ---
 
@@ -98,10 +98,10 @@
 
 ## Phase 8 — Python: same flows, sync API
 
-- [ ] Sent the prompt from INSTRUCTIONS.md §8 and got the 4 Python files
-- [ ] Ran: `source .venv/bin/activate && pytest tests-python/ -v` — all pass
-- [ ] Compared Python API (`get_by_role`) vs TypeScript (`getByRole`)
-- [ ] Compared with `solutions/tests-python/`
+- [x] Sent the prompt from INSTRUCTIONS.md §8 and got the 4 Python files
+- [x] Ran: `source .venv/bin/activate && pytest tests-python/ -v` — all pass
+- [x] Compared Python API (`get_by_role`) vs TypeScript (`getByRole`)
+- [x] Compared with `solutions/tests-python/`
 
 **Validation:** `pytest tests-python/ -v` — all tests pass.
 
