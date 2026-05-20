@@ -1,5 +1,18 @@
 import { test, expect } from '../fixtures';
 
+test.describe('Form initial state', () => {
+  test('input placeholder shows the correct hint text', async ({ todoPage }) => {
+    await expect(todoPage.todoInput).toHaveAttribute(
+      'placeholder',
+      'What needs to be done?'
+    );
+  });
+
+  test('Add button is enabled by default', async ({ todoPage }) => {
+    await expect(todoPage.addButton).toBeEnabled();
+  });
+});
+
 test.describe('Create Todos', () => {
   test('adds a todo and it appears in the list', async ({ todoPage }) => {
     const todoTitle = 'Buy milk';

@@ -10,6 +10,16 @@ from playwright.sync_api import expect
 from pages.todo_page import TodoPage
 
 
+def test_input_placeholder_shows_the_correct_hint_text(todo_page: TodoPage):
+    expect(todo_page.new_todo_input).to_have_attribute(
+        "placeholder", "What needs to be done?"
+    )
+
+
+def test_add_button_is_enabled_by_default(todo_page: TodoPage):
+    expect(todo_page.add_button).to_be_enabled()
+
+
 def test_adds_a_todo_and_it_appears_in_the_list(todo_page: TodoPage):
     todo_title = "Buy milk"
 

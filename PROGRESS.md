@@ -11,8 +11,8 @@
 
 ## Current Status
 
-**Active phase:** Phase 9 — Playwright MCP: browser control
-**Last action:** Phase 8 completed and pushed
+**Active phase:** Workshop Completed! 🚀
+**Last action:** Phase 9 completed and final push performed
 
 ---
 
@@ -109,10 +109,10 @@
 
 ## Phase 9 — Playwright MCP: browser control
 
-- [ ] Copilot navigated to localhost:8000 via MCP and took a screenshot
-- [ ] Copilot inspected the DOM and listed accessible locators
-- [ ] Copilot generated a test based on what it saw in the browser
-- [ ] Understood: MCP `playwright` = browser control, `playwright-test` = run tests
+- [x] Copilot navigated to localhost:8000 via MCP and took a screenshot
+- [x] Copilot inspected the DOM and listed accessible locators
+- [x] Copilot generated a test based on what it saw in the browser
+- [x] Understood: MCP `playwright` = browser control, `playwright-test` = run tests
 
 **Validation:** A test generated via MCP passes when run locally.
 
