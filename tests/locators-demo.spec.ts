@@ -36,7 +36,8 @@ test.describe('Locators Demo', () => {
   });
 
   test('getByText — locate visible static text', async ({ page }) => {
-    const counterText = page.getByText('0 items left');
+    // Regex matches the counter regardless of how many items may remain from other tests
+    const counterText = page.getByText(/\d+ items? left/);
     await expect(counterText).toBeVisible();
   });
 

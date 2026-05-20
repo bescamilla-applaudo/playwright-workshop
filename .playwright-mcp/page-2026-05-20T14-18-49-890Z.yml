@@ -1,0 +1,14 @@
+- main [ref=e2]:
+  - heading "Todo App" [level=1] [ref=e3]
+  - form "Add todo" [ref=e4]:
+    - generic [ref=e5]: New todo
+    - textbox "New todo" [ref=e6]:
+      - /placeholder: What needs to be done?
+    - button "Add" [ref=e7] [cursor=pointer]
+  - region "Todo list" [ref=e8]:
+    - list "Todos" [ref=e9]:
+      - listitem [ref=e10]:
+        - generic [ref=e11]: Buy groceries
+        - 'button "Complete: Buy groceries" [ref=e12] [cursor=pointer]': ✓
+        - 'button "Delete: Buy groceries" [ref=e13] [cursor=pointer]': ✗
+    - status [ref=e14]: 1 item left

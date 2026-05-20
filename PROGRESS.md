@@ -11,8 +11,8 @@
 
 ## Current Status
 
-**Active phase:** Phase 7 — Playwright Agents (planner/generator/healer)
-**Last action:** Phase 6 completed and marked
+**Active phase:** Phase 8 — Python: same flows, sync API
+**Last action:** Phase 7 completed and pushed
 
 ---
 
@@ -86,11 +86,11 @@
 
 ## Phase 7 — Playwright Agents (planner/generator/healer)
 
-- [ ] Switched model to Claude Sonnet 4.6 in the model picker
-- [ ] Used planner: generated plan in `specs/crud-flow.md`
-- [ ] Used generator: converted plan into `tests/flows/crud-flow.spec.ts`
-- [ ] Generated tests pass (or fixed them with healer)
-- [ ] Broke a test and used healer to repair it automatically
+- [x] Switched model to Claude Sonnet 4.6 in the model picker
+- [x] Used planner: generated plan in `specs/crud-flow.md`
+- [x] Used generator: converted plan into `tests/flows/crud-flow.spec.ts`
+- [x] Generated tests pass (or fixed them with healer)
+- [x] Broke a test and used healer to repair it automatically
 
 **Validation:** `npx playwright test tests/flows/crud-flow.spec.ts` — passes.
 
